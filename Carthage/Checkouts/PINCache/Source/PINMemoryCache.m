@@ -6,8 +6,8 @@
 
 #import <pthread.h>
 
-#if SWIFT_PACKAGE
-@import PINOperation;
+#if !__has_include (<PINOperation/PINOperation.h>)
+#import "PINOperation.h"
 #else
 #import <PINOperation/PINOperation.h>
 #endif
@@ -175,6 +175,10 @@ static NSString * const PINMemoryCacheSharedName = @"PINMemoryCacheSharedName";
         PINCacheObjectBlock didRemoveObjectBlock = _didRemoveObjectBlock;
     [self unlock];
 
+    if (object == nil) {
+        return;
+    }
+
     if (willRemoveObjectBlock)
         willRemoveObjectBlock(self, key, object);
 
@@ -239,12 +243,17 @@ static NSString * const PINMemoryCacheSharedName = @"PINMemoryCacheSharedName";
     
     [self lock];
         totalCost = _totalCost;
-        NSArray *keysSortedByCost = [_costs keysSortedByValueUsingSelector:@selector(compare:)];
     [self unlock];
     
     if (totalCost <= limit) {
         return;
     }
+
+    [self lock];
+        NSDictionary *costs = [_costs copy];
+    [self unlock];
+
+    NSArray *keysSortedByCost = [costs keysSortedByValueUsingSelector:@selector(compare:)];
 
     for (NSString *key in [keysSortedByCost reverseObjectEnumerator]) { // costliest objects first
         [self removeObjectAndExecuteBlocksForKey:key];
@@ -264,15 +273,18 @@ static NSString * const PINMemoryCacheSharedName = @"PINMemoryCacheSharedName";
         [self removeExpiredObjects];
     }
 
-    NSUInteger totalCost = 0;
-    
     [self lock];
-        totalCost = _totalCost;
-        NSArray *keysSortedByAccessDate = [_accessDates keysSortedByValueUsingSelector:@selector(compare:)];
+        NSUInteger totalCost = _totalCost;
     [self unlock];
     
     if (totalCost <= limit)
         return;
+    
+    [self lock];
+        NSDictionary *accessDates = [_accessDates copy];
+    [self unlock];
+
+    NSArray *keysSortedByAccessDate = [accessDates keysSortedByValueUsingSelector:@selector(compare:)];
 
     for (NSString *key in keysSortedByAccessDate) { // oldest objects first
         [self removeObjectAndExecuteBlocksForKey:key];
