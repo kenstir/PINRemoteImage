@@ -1,1 +1,1 @@
-github "kenstir/PINOperation" ~> 1.2.1
+github "kenstir/PINOperation" == 1.2.3-kenstir.1
