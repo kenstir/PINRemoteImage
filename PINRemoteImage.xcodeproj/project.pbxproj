@@ -129,8 +129,6 @@
 		F1B9191C1BCF23C900710963 /* PINRemoteImageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = F1B918FB1BCF23C800710963 /* PINRemoteImageTask.h */; };
 		F1B9191D1BCF23C900710963 /* PINRemoteImageTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B918FC1BCF23C800710963 /* PINRemoteImageTask.m */; };
 		F1B9191F1BCF23C900710963 /* PINURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B918FE1BCF23C900710963 /* PINURLSessionManager.m */; };
-		F370FD6624AD0F6D0026A9D9 /* WebPDemux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F370FD6524AD0F6D0026A9D9 /* WebPDemux.framework */; };
-		F370FD6924AD0F920026A9D9 /* WebPDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F370FD6824AD0F920026A9D9 /* WebPDecoder.framework */; };
 		FBC8209C2526277E007FD40D /* PINURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC820812526277E007FD40D /* PINURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBC8209D2526277E007FD40D /* PINURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC820812526277E007FD40D /* PINURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBC8209E2526277E007FD40D /* PINRemoteImageCategoryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC820822526277E007FD40D /* PINRemoteImageCategoryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -350,8 +348,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F370FD6624AD0F6D0026A9D9 /* WebPDemux.framework in Frameworks */,
-				F370FD6924AD0F920026A9D9 /* WebPDecoder.framework in Frameworks */,
 				D2951DD02B8ED02700193695 /* PINCache.xcframework in Frameworks */,
 				D2951DCD2B8ED01B00193695 /* PINOperation.xcframework in Frameworks */,
 			);
@@ -1321,7 +1317,7 @@
 					"$(PROJECT_DIR)/webp",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"PIN_WEBP=1",
+					"PIN_WEBP=0",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Source/Info.plist;
@@ -1360,7 +1356,7 @@
 					"$(PROJECT_DIR)/webp",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"PIN_WEBP=1",
+					"PIN_WEBP=0",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Source/Info.plist;
