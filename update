@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# run carthage update
+
+set -e
+
+carthage update --platform ios --use-xcframeworks --log-path update.log $@
